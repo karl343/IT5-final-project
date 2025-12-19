@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
-
 import sys
 import os
 
-# Add the application directory to Python path
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, APP_DIR)
 
@@ -12,11 +10,7 @@ from PyQt6.QtWidgets import QApplication, QMessageBox, QSplashScreen
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QPixmap, QColor
 
-
 def create_audit_log_table(db):
-    """
-    Create the audit_log table if it doesn't exist.
-    """
     create_table_query = """
         CREATE TABLE IF NOT EXISTS audit_log (
             log_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -45,25 +39,18 @@ def create_audit_log_table(db):
 
 
 def initialize_database():
-    """
-    Initialize the database connection and schema.
-    Creates tables if they don't exist.
-    """
     try:
         from database.db import db
         
-        # Check if main tables exist - if not, initialize full schema
         if not db.table_exists('users'):
             print("Initializing database schema...")
             schema_path = os.path.join(APP_DIR, 'database', 'schema.sql')
             db.initialize_schema(schema_path)
         else:
-            # Check if audit_log table exists, create it if missing
             if not db.table_exists('audit_log'):
                 print("Creating missing audit_log table...")
                 create_audit_log_table(db)
         
-        # Initialize default admin user
         from modules.users import user_manager
         user_manager.initialize_admin()
         
@@ -75,10 +62,6 @@ def initialize_database():
 
 
 def show_splash_screen(app):
-    """
-    Display a splash screen during application startup.
-    """
-    # Create a simple splash screen
     splash_pixmap = QPixmap(400, 250)
     splash_pixmap.fill(QColor("#1a237e"))
     
@@ -89,7 +72,6 @@ def show_splash_screen(app):
         }
     """)
     
-    # Show splash
     splash.show()
     splash.showMessage(
         "SwiftPay\nPayroll Management System\n\nLoading...",
@@ -97,32 +79,23 @@ def show_splash_screen(app):
         Qt.GlobalColor.white
     )
     
-    # Process events to display splash
     app.processEvents()
     
     return splash
 
 
 def main():
-    """
-    Main function to start the SwiftPay application.
-    """
-    # Create application instance
     app = QApplication(sys.argv)
     
-    # Set application properties
     app.setApplicationName("SwiftPay")
     app.setApplicationVersion("1.0.0")
     app.setOrganizationName("SwiftPay")
     
-    # Set default font
     font = QFont("Segoe UI", 10)
     app.setFont(font)
     
-    # Show splash screen
     splash = show_splash_screen(app)
     
-    # Initialize database
     splash.showMessage(
         "SwiftPay\nPayroll Management System\n\nConnecting to database...",
         Qt.AlignmentFlag.AlignCenter,
@@ -146,7 +119,6 @@ def main():
         )
         sys.exit(1)
     
-    # Load modules
     splash.showMessage(
         "SwiftPay\nPayroll Management System\n\nLoading modules...",
         Qt.AlignmentFlag.AlignCenter,
@@ -154,46 +126,36 @@ def main():
     )
     app.processEvents()
     
-    # Import UI components
     from ui.login_ui import LoginWindow
     from ui.dashboard_ui import DashboardWindow
     
-    # Close splash screen
     splash.close()
     
-    # Create and show login window
     login_window = None
     dashboard_window = None
     
     def on_login_success(user_data):
-        """Handle successful login"""
         nonlocal dashboard_window, login_window
         
-        # Create and show dashboard
         dashboard_window = DashboardWindow(user_data)
         dashboard_window.logout_requested.connect(on_logout)
         dashboard_window.show()
     
     def on_logout():
-        """Handle logout"""
         nonlocal login_window, dashboard_window
         
-        # Close dashboard
         if dashboard_window:
             dashboard_window.close()
             dashboard_window = None
         
-        # Show login window again
         login_window = LoginWindow()
         login_window.login_success.connect(on_login_success)
         login_window.show()
     
-    # Show login window
     login_window = LoginWindow()
     login_window.login_success.connect(on_login_success)
     login_window.show()
     
-    # Run the application
     sys.exit(app.exec())
 
 
