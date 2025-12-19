@@ -1,0 +1,6 @@
+PyQt6
+mysql-connector-python
+matplotlib
+reportlab
+pandas
+openpyxl

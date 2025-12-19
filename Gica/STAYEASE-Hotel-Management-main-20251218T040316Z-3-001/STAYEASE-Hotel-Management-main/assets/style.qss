@@ -1,0 +1,327 @@
+/* Global Styles */
+QWidget {
+    font-family: "Segoe UI", "Inter", "Roboto", sans-serif;
+    font-size: 14px;
+    color: #2c3e50;
+    outline: none;
+}
+
+/* Main Window Background */
+QMainWindow {
+    background-color: #f8f9fa; /* Light Gray/White smoke */
+}
+
+/* Sidebar */
+QWidget#Sidebar {
+    background-color: #1a252f; /* Dark Navy */
+    border-right: 1px solid #1a252f;
+}
+
+QPushButton#SidebarButton {
+    text-align: left;
+    padding: 12px 25px;
+    border: none;
+    background-color: transparent;
+    color: #95a5a6; /* Softer Gray Text */
+    font-weight: 600;
+    border-radius: 8px; /* Smooth rounded corners */
+    margin: 5px 15px; /* More spacing between buttons */
+    font-size: 15px;
+}
+
+QPushButton#SidebarButton:hover {
+    background-color: #2c3e50;
+    color: #ffffff;
+    padding-left: 30px; /* Slight slide effect */
+}
+
+QPushButton#SidebarButton:checked {
+    background-color: #3498db; /* Primary Blue */
+    color: white;
+    font-weight: bold;
+    /* Removed border-left line in favor of full background */
+}
+
+/* Header */
+QWidget#Header {
+    background-color: #F5F5F5;
+    border-bottom: 1px solid #eaebed;
+    /* Box shadow is not directly supported on QWidget in all contexts, 
+       but we can fake it or use QGraphicsDropShadowEffect in code.
+       For QSS, border-bottom is reliable. */
+}
+
+QLabel#HeaderTitle {
+    color: #2c3e50;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* User Card in Sidebar */
+QFrame#UserCard {
+    background-color: #243447; /* Slightly lighter than sidebar */
+    border-radius: 12px;
+    margin: 10px 15px;
+    padding: 15px;
+    border: 1px solid #34495e;
+}
+QLabel#UserName {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+QLabel#UserRole {
+    color: #bdc3c7;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* Cards (Dashboard) */
+QFrame#Card {
+    background-color: #F5F5F5;
+    border-radius: 12px;
+    border: 1px solid #ecf0f1;
+    min-height: 120px;
+}
+
+QFrame#Card:hover {
+    border: 1px solid #3498db;
+    background-color: #fdfdfd;
+}
+
+QLabel#CardTitle {
+    color: #7f8c8d;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+QLabel#CardValue {
+    color: #2c3e50;
+    font-size: 36px;
+    font-weight: 800;
+}
+
+/* Standard Buttons */
+QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1f618d;
+}
+
+QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #ecf0f1;
+}
+
+/* Danger Button */
+/* Danger Button (Logout) */
+QPushButton#DangerButton {
+    background-color: #e74c3c;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px; /* Fully rounded pill */
+    padding: 10px 20px;
+    margin: 10px 15px;
+}
+QPushButton#DangerButton:hover {
+    background-color: #c0392b;
+    padding-left: 20px; /* No slide for logout, just color change */
+}
+
+/* Tables */
+QTableWidget {
+    background-color: #F5F5F5;
+    border: 1px solid #ecf0f1;
+    border-radius: 8px;
+    gridline-color: #f0f3f4;
+    selection-background-color: #ebf5fb; /* Very light blue */
+    selection-color: #2c3e50;
+    alternate-background-color: #fdfdfd;
+}
+
+QHeaderView::section {
+    background-color: #f8f9fa;
+    padding: 12px;
+    border: none;
+    border-bottom: 2px solid #ecf0f1;
+    font-weight: 700;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+QTableWidget::item {
+    padding: 12px;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+/* Inputs */
+QLineEdit, QComboBox, QDateEdit, QSpinBox {
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    background-color: #F5F5F5;
+    color: #2c3e50;
+    selection-background-color: #3498db;
+}
+
+QLineEdit:focus, QComboBox:focus, QDateEdit:focus, QSpinBox:focus {
+    border: 1px solid #3498db;
+    background-color: #F5F5F5;
+}
+
+/* QComboBox Dropdown */
+QComboBox::drop-down {
+    border: none;
+    width: 30px;
+}
+
+QComboBox::down-arrow {
+    image: none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #2c3e50;
+    width: 0;
+    height: 0;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #F5F5F5;
+    border: 1px solid #3498db;
+    selection-background-color: #3498db;
+    selection-color: white;
+    color: #2c3e50;
+    padding: 5px;
+    outline: none;
+}
+
+QComboBox QAbstractItemView::item {
+    padding: 8px 12px;
+    min-height: 25px;
+}
+
+QComboBox QAbstractItemView::item:hover {
+    background-color: #e3f2fd;
+    color: #2c3e50;
+}
+
+QComboBox QAbstractItemView::item:selected {
+    background-color: #3498db;
+    color: white;
+}
+
+QMenu {
+    background-color: #F5F5F5;
+    border: 1px solid #ecf0f1;
+    border-radius: 6px;
+    padding: 5px 0;
+}
+
+QMenu::item {
+    padding: 8px 25px;
+    color: #2c3e50;
+}
+
+QMenu::item:selected {
+    background-color: #f4f6f7;
+    color: #3498db;
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: #ecf0f1;
+    margin: 5px 0;
+}
+
+/* Scrollbars */
+QScrollBar:vertical {
+    border: none;
+    background: #f1f1f1;
+    width: 8px;
+    margin: 0px 0px 0px 0px;
+    border-radius: 4px;
+}
+QScrollBar::handle:vertical {
+    background: #bdc3c7;
+    min-height: 20px;
+    border-radius: 4px;
+}
+/* Login Window Specific */
+QDialog#LoginWindow {
+    background-color: #F5F5F5;
+}
+
+/* Calendar Widget */
+QCalendarWidget QWidget {
+    background-color: #F5F5F5;
+    alternate-background-color: #f9f9f9;
+}
+
+/* Navigation Bar (Header) */
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #3498db; /* Primary Blue */
+    min-height: 40px;
+}
+
+QCalendarWidget QToolButton {
+    color: white;
+    font-weight: bold;
+    icon-size: 24px;
+    border: none;
+    background-color: transparent;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+QCalendarWidget QToolButton:hover {
+    background-color: #2980b9;
+}
+
+QCalendarWidget QMenu {
+    background-color: #F5F5F5;
+    color: #2c3e50;
+    border: 1px solid #bdc3c7;
+}
+
+QCalendarWidget QSpinBox {
+    background-color: #F5F5F5;
+    color: #2c3e50;
+    selection-background-color: #3498db;
+    selection-color: white;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+}
+
+/* Day Names (Sun, Mon, etc) */
+QCalendarWidget QTableView {
+    selection-background-color: #3498db;
+    selection-color: white;
+    outline: none;
+}
+
+QCalendarWidget QAbstractItemView:enabled {
+    color: #2c3e50;
+    background-color: #F5F5F5;
+    selection-background-color: #3498db;
+    selection-color: white;
+}
+
+QCalendarWidget QAbstractItemView:disabled {
+    color: #bdc3c7;
+}
